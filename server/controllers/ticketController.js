@@ -35,3 +35,18 @@ export const UpdateTickets = async (req, res, next) => {
         next(err)
     }
 }
+
+export const TicketsFindById = async (req, res, next) => {
+    try {
+        const ticketById = await Ticket.findById(req.params.id);
+
+        if (!ticketById) {
+            res.status(404);
+            throw new Error("Ticket not found");
+        }
+
+        res.status(200).json(ticketById);
+    } catch (err) {
+        next(err)
+    }
+}
